@@ -8,10 +8,12 @@
 
 
 /* place other "#define" statements here for key parameters */
-
+#define N 500
 
 /* place your global variables (e.g., large arrays) here */
-
+double a[N][N];
+double b[N][N];
+double c[N][N];
 
 /* this calls a library routine to record the current time
    which will be the number of seconds and nanoseconds
@@ -40,16 +42,29 @@ double TimeDiff (struct timespec *p0, struct timespec *p1)
 
 /* place your data-initialization routine here */
 
-void initialize_my_data (void)
+void initialize_my_data(void)
 {
-  /* ... */
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < N; j++) {
+      a[i][j] = i + j;  // Example: sum of indices for testing
+      b[i][j] = i - j;  // Example: difference of indices for testing
+      c[i][j] = 0;      // Initialize result array c with zero
+    }
+  }
 }
 
 /* place the code for your algorithm of interest here */
 
-void run_my_algorithm (void)
+void matrix_multiply(void)
 {
-  /* ... */
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < N; j++) {
+      c[i][j] = 0;
+      for (int k = 0; k < N; k++) {
+        c[i][j] += a[i][k] * b[k][j];
+      }
+    }
+  }
 }
 
 /* main routine that performs multiple trials and reports the results */
@@ -71,7 +86,7 @@ int main(int argc, char *argv[])
   initialize_my_data ();
 
   Time (&start);
-  run_my_algorithm ();
+  matrix_multiply ();
   Time (&finish);
   printf ("\n");
   printf ("initialization run elapsed time = %g sec\n", TimeDiff (&start, &finish));
@@ -87,7 +102,7 @@ int main(int argc, char *argv[])
     initialize_my_data ();
 
     Time (&start);
-    run_my_algorithm ();
+    matrix_multiply ();
     Time (&finish);
 
     /* record the time difference for this trial in array for later analysis */
@@ -116,4 +131,3 @@ int main(int argc, char *argv[])
 
   return 0;
 }
-
