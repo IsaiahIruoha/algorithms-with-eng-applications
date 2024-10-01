@@ -58,11 +58,11 @@ void initialize_my_data(void)
 
 void matrix_multiply(void)
 {
-  for (int ii = 0; ii < N; i+=B) {
-    for (int jj = 0; jj < N; j+=B) {
-     // c[i][j] = 0;
+  for (int ii = 0; ii < N; ii+=B) {
+    for (int jj = 0; jj < N; jj+=B) {
+     c[i][j] = 0;
       for (int i = ii; i < ii + B; i++){
-        for (int j = jj; j < jj + B; j++{
+        for (int j = jj; j < jj + B; j++){
           for (int k = 0; k < N; k++) {
             c[i][j] += a[i][k] * b[k][j];
           }
