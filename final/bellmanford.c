@@ -1,15 +1,21 @@
 int BellmanFord(Graph *G, int s) {
     InitializeSingleSource(G, s);
-    int u;
+    int u, v;
     for (int i = 0; i < G->num_vertices; i++) {
         for (Edge *e = G->v[i].adj; e != NULL; e = e->next) {
             u = e->vertex; 
-            Relax(G,u,i, e->weight); 
+            v = e->other_vertex;
+            // Relax(G,u,i, e->weight);
+            if (G->v[v].d > G->v[u].d + e->weight) {
+                G->v[v].d = G->v[u].d + e->weight;
+                G->v[v].pred = u; 
+            } 
         }
     }
     for (int i = 0; i < G->num_vertices; i++) {
         for(Edge *e = G->v[i].adj; e != NULL; e = e->next){
             u = e->vertex; 
+            v = e->other_vertex;
             if (G->v[i].d > G ->v[u].d + e->weight) {
                 return 0;
             }

@@ -1,5 +1,5 @@
-// Assume edges are already sorted in non-decreasing order of weight
-Edge *sortedEdges = g->edges; // Pointer to the graph's edge list
+// Sort the edges in non-decreasing order of weight
+Edge *sortedEdges = SORT_EDGES(g->edges, g->num_edges); // Assume SORT_EDGES sorts and returns a pointer
 
 for (int i = 0; i < g->num_edges; i++) {
     int u = sortedEdges[i].vertex;        // First vertex of the edge
