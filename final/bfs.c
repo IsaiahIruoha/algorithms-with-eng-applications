@@ -12,15 +12,14 @@ void BFS(graph *g, int s) {
 
     while (Q !empty) {
         int u = dequeue(Q);
-        edge *curr = >v[u].adj;
-        while (curr != NULL) {
+        for (edge *curr = g->v[u].adj; curr != NULL; curr = curr->next) {
             int v = curr->vertex; 
             if (g->v[v].color == WHITE) {
+                g->v[v].color = GRAY;
                 g->v[v].dist = g->v[u].dist + 1;
                 g->v[v].pred = u;
                 enqueue(Q, v);
             }
-            curr = curr->next;
         }
         g->v[u].color = BLACK;
     }
