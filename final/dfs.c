@@ -16,7 +16,7 @@ void DFSvisit(graph g, int u) {
     g->v[u].dist = time;
     g->v[u].color = GRAY;
 
-    for(edge *curr = g->[u].adj; curr != NULL; curr = curr->next) {
+    for(edge *curr = g->v[u].adj; curr != NULL; curr = curr->next) {
         int v = curr->vertex; 
         if (g->v[v].color == WHITE) {
             g->v[v].pred = u;
